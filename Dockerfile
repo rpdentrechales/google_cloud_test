@@ -6,5 +6,8 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-EXPOSE 8501
-CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.enableCORS=false"]
+# Use environment variable PORT (set by Cloud Run)
+EXPOSE 8080
+
+# Tell Streamlit to use that port
+CMD ["streamlit", "run", "app.py", "--server.port=${PORT}", "--server.enableCORS=false"]
